@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "tailwindcss.vscode-tailwindcss",
+    "esbenp.prettier-vscode"
+  ],
+  "unwantedRecommendations": []
+}
