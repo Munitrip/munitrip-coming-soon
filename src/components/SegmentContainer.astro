@@ -2,7 +2,7 @@
 // SegmentContainer.astro
 ---
 
-<div class="w-full bg-bg-light pt-8">
+<div class="w-full bg-bg-general pt-8">
   <!-- Contenedor del carrusel -->
   <div
     id="carousel-container"
@@ -12,18 +12,7 @@
   </div>
 
   <!-- Indicadores de posición (Dots) -->
-  <div id="dots-container" class="flex justify-center gap-3 py-3">
-    <!-- Se asume que hay al menos 2 secciones; puedes ajustar el número de divs manualmente 
-         o generarlos por script si los segmentos fueran dinámicos -->
-    <div
-      class="dot w-3 h-3 rounded-full bg-brand-dark-muted transition-all duration-300"
-    >
-    </div>
-    <div
-      class="dot w-3 h-3 rounded-full bg-border-light transition-all duration-300"
-    >
-    </div>
-  </div>
+  <div id="dots-container" class="flex justify-center gap-3 py-3"></div>
 </div>
 
 <style>
@@ -43,11 +32,30 @@
     const container = document.getElementById(
       'carousel-container'
     ) as HTMLDivElement | null;
-    const dots = document.querySelectorAll(
+    const dotsContainer = document.getElementById(
+      'dots-container'
+    ) as HTMLDivElement | null;
+
+    if (!container || !dotsContainer) return;
+
+    // Contar el número de segmentos (children del carousel)
+    const segmentCount = container.children.length;
+    let autoScrollInterval: ReturnType<typeof setInterval> | null = null;
+    let isAutoScrolling = true;
+
+    // Generar dots dinámicamente
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < segmentCount; i++) {
+      const dot = document.createElement('div');
+      dot.className =
+        'dot w-3 h-3 rounded-full bg-border-light transition-all duration-300';
+      dot.style.cursor = 'pointer';
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = dotsContainer.querySelectorAll(
       '.dot'
     ) as NodeListOf<HTMLDivElement>;
-
-    if (!container || dots.length === 0) return;
 
     const updateDots = (): void => {
       // Calculamos el índice actual
@@ -66,11 +74,76 @@
       });
     };
 
-    // Evento de scroll
-    container.addEventListener('scroll', updateDots, { passive: true });
+    const getCurrentIndex = (): number => {
+      const scrollPos = container.scrollLeft;
+      const width = container.clientWidth;
+      return Math.round(scrollPos / width);
+    };
+
+    const scrollToIndex = (index: number): void => {
+      const scrollPos = index * container.clientWidth;
+      container.scrollTo({
+        left: scrollPos,
+        behavior: 'smooth',
+      });
+    };
+
+    const startAutoScroll = (): void => {
+      if (autoScrollInterval) clearInterval(autoScrollInterval);
+
+      autoScrollInterval = setInterval(() => {
+        const currentIndex = getCurrentIndex();
+        const nextIndex = (currentIndex + 1) % segmentCount;
+        scrollToIndex(nextIndex);
+      }, 4500); // Cambia a la siguiente card cada 5 segundos
+    };
+
+    const stopAutoScroll = (): void => {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+      }
+    };
+
+    // Evento de scroll manual - pausa auto-scroll
+    container.addEventListener('scroll', () => {
+      updateDots();
+      if (isAutoScrolling) {
+        stopAutoScroll();
+        isAutoScrolling = false;
+
+        // Reanudar auto-scroll después de 8 segundos de inactividad
+        setTimeout(() => {
+          if (!isAutoScrolling) {
+            isAutoScrolling = true;
+            startAutoScroll();
+          }
+        }, 8000);
+      }
+    });
+
+    // Click en dots para navegar
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        stopAutoScroll();
+        isAutoScrolling = false;
+        scrollToIndex(i);
+
+        // Reanudar auto-scroll después de 8 segundos
+        setTimeout(() => {
+          if (!isAutoScrolling) {
+            isAutoScrolling = true;
+            startAutoScroll();
+          }
+        }, 8000);
+      });
+    });
 
     // Ejecutar al inicio para marcar el primer dot
     updateDots();
+
+    // Iniciar auto-scroll
+    startAutoScroll();
   };
 
   // Ejecutar cuando Astro hidrata el script

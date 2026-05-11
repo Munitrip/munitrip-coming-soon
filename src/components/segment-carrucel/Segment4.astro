@@ -1,0 +1,165 @@
+---
+// Segment1.astro
+import { Image } from 'astro:assets';
+
+interface Props {
+  hero4: ImageMetadata;
+  hero4Profile: ImageMetadata;
+  icono: ImageMetadata;
+  // Solo pasamos la imagen como prop
+}
+
+const { hero4 } = Astro.props;
+const { hero4Profile } = Astro.props;
+const { icono } = Astro.props;
+---
+
+<!-- SEGMENTO 2: Ajustado para evitar desbordamiento al aumentar tamaños -->
+<div
+  class="min-w-full snap-center bg-bg-card shrink-0 flex flex-col overflow-hidden backface-hidden transform-gpu"
+>
+  <div
+    class="w-full flex flex-col items-center shadow-sm text-center px-1 py-7 border-b-2 border-border-light"
+  >
+    <h3
+      class="text-text-secondary font-extrabold text-[16px] -mb-1.5 antialiased"
+    >
+      Información de los establecimientos
+    </h3>
+    <h2
+      class="text-text-title font-extrabold text-[22px] leading-tight antialiased"
+    >
+      Perfiles de negocios
+    </h2>
+  </div>
+
+  <div
+    class="relative w-full h-full bg-bg-general flex flex-col items-center justify-center"
+  >
+    <div
+      class="w-full max-w-[360px] mx-auto flex items-center justify-center z-10 drop-shadow-2xl"
+      style="position:relative; margin-top:-16px; margin-bottom:-24px; height:230px;"
+    >
+      <div
+        class="w-full h-full rounded-3xl shadow-lg shadow-black/20 bg-white relative"
+      >
+        <Image
+          src={hero4}
+          alt="Restaurante en Viotá"
+          class="w-full h-full object-cover rounded-3xl shadow-md"
+        />
+
+        <div
+          class="absolute rounded-3xl inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-black/20"
+        >
+        </div>
+
+        <div
+          class="absolute top-4 left-4 right-4 flex justify-between items-center z-20"
+        >
+          <button
+            class="p-2 bg-text-title/70 backdrop-blur-md rounded-full text-white hover:bg-black/60 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg
+            >
+          </button>
+
+          <div
+            class="flex items-center -top-4 gap-1.5 px-3 py-1 bg-text-title backdrop-blur-md rounded-full"
+          >
+            <Image
+              src={icono}
+              alt="Restaurante en Viotá"
+              class="w-5 h-5 rounded-full object-cover"
+            />
+            <span class="text-[10px] font-semibold text-white"
+              >Recomendados</span
+            >
+          </div>
+
+          <button
+            class="p-2 bg-text-title/70 backdrop-blur-md rounded-full text-white hover:bg-black/60 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"
+              ></path><polyline points="16 6 12 2 8 6"></polyline><line
+                x1="12"
+                x2="12"
+                y1="2"
+                y2="15"></line></svg
+            >
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="absolute w-[85%] -bottom-9 border-b-2 border-border-light bg-white rounded-t-[35px] pt-4 px-5 pb-4 z-20 shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.1)]"
+      >
+        <div class="relative px-2 flex justify-around z-21 -mt-10">
+          <div class="p-1 border-b-2 border-border-light bg-white rounded-full">
+            <div class="w-12 h-12 bg-slate-200 rounded-full overflow-hidden">
+              <Image
+                src={hero4Profile}
+                alt="Restaurante en Viotá"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div class="flex justify-center gap-1 mb-1">
+            <div class="flex items-center justify-center">
+              <div
+                class="px-3 gab 1 py-1 bg-brand-dark text-white rounded-xl text-[11px] font-semibold"
+              >
+                <span class="mr-1">★ </span>
+                <span>4.2</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <div
+                class="px-3 py-1 bg-brand-dark text-white rounded-xl text-[11px] font-semibold"
+              >
+                242 - comentarios
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex px-2 justify-center flex-col">
+          <div class="flex justify-between items-center mb-1">
+            <span
+              class="text-[11px] pl-1 font-bold text-text-paragraph tracking-tighter"
+              >Restaurante</span
+            >
+            <p
+              class="text-[9px] font-bold text-end pr-5 z-30 text-[#1C2120]/70"
+            >
+              Abierto Ahora - 10:00pm
+            </p>
+          </div>
+          <h4 class="text-[18px] font-extrabold text-text-title leading-tight">
+            Petronio Cocina de Autor
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

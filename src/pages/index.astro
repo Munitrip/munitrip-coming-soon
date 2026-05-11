@@ -5,11 +5,15 @@ import logoMunitrip from '../assets/logo-munitrip-1.png';
 import hero1 from '../assets/hero-1.webp';
 import hero2 from '../assets/hero-2.webp';
 import hero3 from '../assets/hero-3-1.webp';
+import hero4 from '../assets/hero-4.webp';
+import hero4Profile from '../assets/hero-4-1.webp';
+import icono from '../assets/munitrip-favicon.webp';
 
 import SegmentContainer from '../components/SegmentContainer.astro';
 import Segment1 from '../components/segment-carrucel/Segment1.astro';
 import Segment2 from '../components/segment-carrucel/Segment2.astro';
 import Segment3 from '../components/segment-carrucel/Segment3.astro';
+import Segment4 from '../components/segment-carrucel/Segment4.astro';
 ---
 
 <Layout title="Munitrip | Próximamente">
@@ -62,6 +66,12 @@ import Segment3 from '../components/segment-carrucel/Segment3.astro';
           <!-- Contenedor de desplazamiento con altura controlada -->
 
           <Segment1 hero1={hero1} />
+          <Segment4
+            hero4={hero4}
+            hero4Profile={hero4Profile}
+            icono={icono}
+            client:load
+          />
           <Segment2 hero2={hero2} />
           <Segment3 hero3={hero3} />
         </SegmentContainer>
