@@ -98,9 +98,9 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
 
         <!-- Formulario Pill sin espacios internos -->
         <form
+          id="newsletter-form"
           class="w-full max-w-[400px] flex bg-bg-general border border-border-light rounded-full overflow-hidden shadow-sm"
         >
-          <!-- Contenedor del Icono e Input -->
           <div class="flex items-center flex-1 pl-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -114,11 +114,12 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
               stroke-linejoin="round"
               class="opacity-80 text-text-secondary"
             >
-              <rect width="20" height="16" x="2" y="4" rx="2"></rect><path
-                d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
             </svg>
 
             <input
+              id="email-input"
               type="email"
               placeholder="Tu correo electrónico"
               required
@@ -126,7 +127,6 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
             />
           </div>
 
-          <!-- Botón pegado al borde derecho -->
           <button
             type="submit"
             class="bg-brand-dark rounded-full text-white px-9 py-3 text-[13px] font-medium hover:bg-brand-dark-hover transition-colors"
@@ -385,3 +385,34 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
     </div>
   </main>
 </Layout>
+<script>
+  import { supabase } from '../lib/supabase';
+
+  const form = document.querySelector('#newsletter-form') as HTMLFormElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Buscamos el input específicamente por su ID dentro del formulario
+    const emailInput = document.querySelector(
+      '#email-input'
+    ) as HTMLInputElement;
+
+    if (emailInput) {
+      const email = emailInput.value;
+
+      const { error } = await supabase
+        .from('leads')
+        .insert([{ email: email, municipality: 'Viotá' }]);
+
+      if (error) {
+        alert('Error: ' + error.message);
+      } else {
+        alert('¡Registro exitoso para Munitrip!');
+        form.reset();
+      }
+    } else {
+      console.error("No se encontró el input con id 'email-input'");
+    }
+  });
+</script>
