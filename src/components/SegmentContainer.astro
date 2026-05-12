@@ -95,7 +95,7 @@
         const currentIndex = getCurrentIndex();
         const nextIndex = (currentIndex + 1) % segmentCount;
         scrollToIndex(nextIndex);
-      }, 4500); // Cambia a la siguiente card cada 5 segundos
+      }, 4000); // Cambia a la siguiente card cada 5 segundos
     };
 
     const stopAutoScroll = (): void => {
@@ -118,7 +118,7 @@
             isAutoScrolling = true;
             startAutoScroll();
           }
-        }, 8000);
+        }, 5000);
       }
     });
 
@@ -135,7 +135,7 @@
             isAutoScrolling = true;
             startAutoScroll();
           }
-        }, 8000);
+        }, 4000);
       });
     });
 
