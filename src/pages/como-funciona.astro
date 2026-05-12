@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://munitrip.com';
+const canonical = `${siteUrl}/como-funciona`;
+const title = 'Cómo funciona Munitrip - Descubre municipios de Colombia';
+const description = 'Descubre cómo Munitrip conectará turistas y habitantes con lo mejor de Viotá, Cundinamarca, y cada municipio de Colombia. Explora alojamientos, restaurantes y experiencias.';
+
+const steps = [
+  { name: 'Explora', text: 'Podrás navegar por categorías exclusivas de alojamientos, gastronomía, experiencias y vida nocturna en Viotá y cada municipio de Colombia.' },
+  { name: 'Descubre', text: 'Accederás a perfiles detallados con fotografías de alta calidad, horarios actualizados y recomendaciones reales de cada lugar.' },
+  { name: 'Conecta', text: 'Facilitaremos el contacto directo con los negocios locales a través de un solo clic hacia sus redes sociales o WhatsApp.' },
+  { name: 'Disfruta', text: 'Tendrás en tu mano la guía definitiva para vivir cada destino con la confianza y el respaldo de Munitrip.' },
+];
+
+const faqItems = [
+  {
+    question: '¿Cuándo estará disponible Munitrip?',
+    answer: 'Estamos trabajando para que la experiencia sea perfecta. Regístrate en nuestra lista de espera para recibir la invitación exclusiva al lanzamiento.'
+  },
+  {
+    question: '¿Munitrip tendrá algún costo para los visitantes?',
+    answer: 'No. Munitrip será una herramienta completamente gratuita para que turistas y habitantes descubran lo mejor de Viotá, Cundinamarca, y cada municipio de Colombia.'
+  },
+  {
+    question: 'Soy comerciante, ¿cómo puedo aparecer en Munitrip?',
+    answer: 'Actualmente estamos en fase de registro de socios fundadores. Contáctanos por WhatsApp para conocer cómo integrar tu negocio antes del estreno oficial.'
+  },
+  {
+    question: '¿Qué hace a Munitrip diferente de otras plataformas?',
+    answer: 'Munitrip es una red pensada por y para el desarrollo local de los municipios de Colombia. Centralizamos toda la oferta de valor de cada destino — desde Viotá hasta cada rincón del país — en un solo lugar: alojamientos, restaurantes, experiencias, eventos y más.'
+  }
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalURL={canonical}
+  jsonLd={[
+    {
+      "@type": "HowTo",
+      "name": "Cómo usar Munitrip",
+      "description": "Pasos para usar Munitrip y descubrir los mejores lugares de los municipios de Colombia",
+      "estimatedCost": { "@type": "MonetaryAmount", "value": "0", "currency": "COP" },
+      "step": steps.map((s, i) => ({
+        "@type": "HowToStep",
+        "position": i + 1,
+        "name": s.name,
+        "text": s.text
+      }))
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
+    }
+  ]}
+>
+  <main class="min-h-screen bg-bg-general font-inter flex flex-col items-center">
+    <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl 2xl:max-w-4xl bg-bg-card min-h-screen flex flex-col shadow-xl">
+      <Header activePage="como-funciona" />
+
+      <section class="px-6 md:px-10 py-8 md:py-12">
+        <h1 class="text-brand-dark font-extrabold text-2xl md:text-3xl lg:text-4xl text-center">¿Cómo funcionará Munitrip?</h1>
+        <p class="text-text-paragraph text-center mt-3 text-sm md:text-base max-w-lg mx-auto">
+          Una plataforma en construcción que <strong>conectará turistas y habitantes</strong> con lo mejor de <strong>Viotá, Cundinamarca</strong>, y cada municipio de Colombia.
+        </p>
+
+        <div class="w-20 h-[3px] rounded-full mx-auto my-6 bg-brand-dark"></div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          {steps.map((step) => (
+            <article class="bg-bg-general rounded-2xl p-6 border border-border-light text-center">
+              <h2 class="text-brand-dark font-extrabold text-lg md:text-xl mb-2">{step.name}</h2>
+              <p class="text-text-paragraph text-sm md:text-base leading-relaxed">{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="px-6 md:px-10 py-8 md:py-12 bg-bg-general border-t border-border-light">
+        <h2 class="text-brand-dark font-extrabold text-xl md:text-2xl text-center mb-8">Preguntas frecuentes</h2>
+        <div class="max-w-lg mx-auto space-y-4">
+          {faqItems.map((item) => (
+            <details class="bg-bg-card rounded-xl border border-border-light overflow-hidden">
+              <summary class="px-5 py-4 text-sm md:text-base font-bold text-text-title cursor-pointer hover:bg-border-light/50 transition-colors">
+                {item.question}
+              </summary>
+              <p class="px-5 pb-4 text-sm md:text-base text-text-paragraph leading-relaxed">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="px-6 md:px-10 py-8 md:py-12 flex flex-col items-center text-center">
+        <h3 class="text-brand-dark font-bold text-lg md:text-xl mb-3">¿Listo para descubrir los municipios de Colombia?</h3>
+        <p class="text-text-paragraph text-sm md:text-base mb-6 max-w-sm">Regístrate y sé el primero en enterarte cuando lancemos Munitrip</p>
+        <a href="/" class="bg-brand-dark text-white px-8 py-2.5 rounded-full text-sm md:text-base font-medium hover:bg-brand-dark-hover transition-colors shadow-sm">
+          Recibir invitación
+        </a>
+      </section>
+
+      <Footer />
+    </div>
+  </main>
+</Layout>

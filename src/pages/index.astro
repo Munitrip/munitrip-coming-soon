@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import logoMunitrip from '../assets/logo-munitrip-1.png';
 import hero1 from '../assets/hero-1.webp';
 import hero2 from '../assets/hero-2.webp';
 import hero3 from '../assets/hero-3-1.webp';
@@ -9,6 +8,8 @@ import hero4 from '../assets/hero-4.webp';
 import hero4Profile from '../assets/hero-4-1.webp';
 import icono from '../assets/munitrip-favicon.webp';
 
+import Header from '../components/Header.astro';
+import Modal from '../components/Modal.astro';
 import SegmentContainer from '../components/SegmentContainer.astro';
 import Segment1 from '../components/segment-carrucel/Segment1.astro';
 import Segment2 from '../components/segment-carrucel/Segment2.astro';
@@ -26,29 +27,18 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
     <div
       class="w-full max-w-md bg-bg-card min-h-screen flex flex-col relative shadow-2xl border-x border-border-light"
     >
-      <!-- CABECERA (White Section) -->
-      <header class="pt-10 pb-5 flex flex-col items-center bg-bg-card">
-        <!-- Logo Section -->
-        <div class="w-24 h-24 flex items-center pb-3 justify-center">
-          <Image
-            src={logoMunitrip}
-            alt="Munitrip Logo"
-            class="w-full h-full object-contain"
-          />
-        </div>
+      <Header activePage="inicio" />
 
-        <!-- Títulos Principales -->
-        <div class="text-center">
-          <h1
-            class="text-brand-dark font-extrabold text-3xl tracking-tight leading-none"
-          >
-            ¡Próximamente!
-          </h1>
-          <h2 class="text-text-paragraph font-medium text-lg">
-            Algo <span class="font-bold text-brand-dark">grande</span> se está construyendo
-          </h2>
-        </div>
-      </header>
+      <div class="text-center bg-bg-card pt-4 pb-2 px-6">
+        <h1
+          class="text-brand-dark font-extrabold text-3xl tracking-tight leading-none"
+        >
+          ¡Próximamente!
+        </h1>
+        <h2 class="text-text-paragraph font-medium text-lg mt-1">
+          Algo <span class="font-bold text-brand-dark">grande</span> se está construyendo
+        </h2>
+      </div>
 
       <!-- Banner Informativo (Contraste Oscuro) -->
       <div
@@ -56,7 +46,7 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
       >
         <p class="leading-4">
           La plataforma que conecta turistas y habitantes con lo mejor de <span
-            class="font-bold">Viotá Cundinamarca</span
+            class="font-bold">Viotá, Cundinamarca</span
           >.
         </p>
       </div>
@@ -71,7 +61,6 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
             hero4={hero4}
             hero4Profile={hero4Profile}
             icono={icono}
-            client:load
           />
           <Segment2 hero2={hero2} />
           <Segment3 hero3={hero3} />
@@ -272,10 +261,12 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
           class="text-[12px] text-text-paragraph leading-5 mb-6 font-medium max-w-[330px]"
         >
           Únete a nuestra red de socios y lleva tu negocio a más turistas y
-          visitantes de Viotá
+          visitantes
         </p>
         <a
-          href="#"
+          href="https://wa.me/573227410781?text=Hola,%20quiero%20ser%20socio%20fundador%20de%20Munitrip"
+          target="_blank"
+          rel="noopener noreferrer"
           class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-[13px] font-medium hover:bg-brand-dark-hover transition-colors shadow-sm"
         >
           Sé un socio
@@ -377,13 +368,16 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
             </p>
             <p class="text-[10px] opacity-60 mt-2">
               Conectando turistas y habitantes con lo mejor de Viotá,
-              Cundinamarca
+              Cundinamarca, y cada municipio de Colombia
             </p>
           </div>
         </div>
       </footer>
     </div>
   </main>
+
+  <Modal />
+
 </Layout>
 <script>
   import { supabase } from '../lib/supabase';
@@ -406,9 +400,9 @@ import Segment5 from '../components/segment-carrucel/SegmentMotivational.astro';
         .insert([{ email: email, municipality: 'Viotá' }]);
 
       if (error) {
-        alert('Error: ' + error.message);
+        (window as any).showModal('error', 'Error al registrarte', error.message);
       } else {
-        alert('¡Registro exitoso para Munitrip!');
+        (window as any).showModal('success', '¡Registro exitoso!', 'Gracias por unirte a Munitrip. Te avisaremos cuando lancemos.');
         form.reset();
       }
     } else {

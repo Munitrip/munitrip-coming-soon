@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://munitrip.com';
+const canonical = `${siteUrl}/para-negocios`;
+const title = 'Socios fundadores Munitrip - Registra tu negocio local';
+const description = 'Sé socio fundador de Munitrip y posiciona tu negocio local en Viotá, Cundinamarca. Hoteles, restaurantes, tiendas y servicios de todos los municipios.';
+
+const benefits = [
+  { icon: '🚀', title: 'Prioridad de lanzamiento', desc: 'Posicionamiento en las primeras listas de búsqueda de Munitrip desde el día uno. Tus clientes te encontrarán primero.' },
+  { icon: '💬', title: 'Canal directo', desc: 'Sin intermediarios. Los clientes llegarán directo a tu WhatsApp o redes sociales desde tu perfil en Munitrip.' },
+  { icon: '⭐', title: 'Gestión de reputación', desc: 'Herramientas para recibir y mostrar calificaciones de tus clientes, construyendo una reputación sólida desde el inicio.' },
+  { icon: '📱', title: 'Perfil digital', desc: 'Tu negocio en el mapa digital de Munitrip con fotografías, horarios, ubicación y toda la información que tus clientes necesitan.' },
+];
+
+const faqItems = [
+  {
+    question: '¿Cuánto cuesta ser socio fundador?',
+    answer: 'Estamos en fase de selección de aliados estratégicos. Contáctanos por WhatsApp para conocer los beneficios exclusivos para socios fundadores.'
+  },
+  {
+    question: '¿Qué tipos de negocio pueden registrarse?',
+    answer: 'Hoteles, restaurantes, bares, cafés, tiendas, experiencias turísticas, guías locales, artesanos de Viotá y de cualquier municipio que quiera llegar a turistas y visitantes.'
+  },
+  {
+    question: '¿Qué beneficios tengo por ser socio fundador?',
+    answer: 'Los socios fundadores tendrán prioridad en los resultados de búsqueda, aparecerán en nuestras comunicaciones de lanzamiento y recibirán acompañamiento gratuito durante el primer mes.'
+  },
+  {
+    question: '¿Cuándo se lanza Munitrip?',
+    answer: 'Estamos ultimando detalles para ofrecer la mejor experiencia. Al registrarte como socio fundador, recibirás información exclusiva sobre la fecha de lanzamiento y beneficios adicionales.'
+  }
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalURL={canonical}
+  jsonLd={[
+    {
+      "@type": "Service",
+      "name": "Registro de socios fundadores Munitrip",
+      "description": "Programa de socios fundadores para negocios locales de los municipios de Colombia. Posicionamiento prioritario y beneficios exclusivos pre-lanzamiento.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Munitrip",
+        "url": siteUrl
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Viotá", "addressRegion": "Cundinamarca", "addressCountry": "CO" },
+        { "@type": "Country", "name": "Colombia" }
+      ],
+      "serviceType": "BusinessListing",
+      "audience": {
+        "@type": "BusinessAudience",
+        "businessType": ["LocalBusiness", "Restaurant", "LodgingBusiness", "Store", "TouristInformationCenter"]
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "COP",
+        "description": "Registro de socio fundador - beneficios exclusivos pre-lanzamiento"
+      }
+    }
+  ]}
+>
+  <main class="min-h-screen bg-bg-general font-inter flex flex-col items-center">
+    <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl 2xl:max-w-4xl bg-bg-card min-h-screen flex flex-col shadow-xl">
+      <Header activePage="para-negocios" />
+
+      <section class="px-6 md:px-10 py-8 md:py-12">
+        <h1 class="text-brand-dark font-extrabold text-2xl md:text-3xl lg:text-4xl text-center">Socios fundadores Munitrip</h1>
+        <p class="text-text-paragraph text-center mt-3 text-sm md:text-base max-w-lg mx-auto">
+          Estamos seleccionando a los mejores aliados de <strong>Viotá, Cundinamarca</strong>, y de cada municipio de Colombia — hoteles, restaurantes, tiendas y servicios — para formar parte de nuestro lanzamiento oficial.
+        </p>
+
+        <div class="w-20 h-[3px] rounded-full mx-auto my-6 bg-brand-dark"></div>
+
+        <div class="bg-gradient-to-b from-brand-dark/5 to-transparent rounded-2xl p-6 md:p-8 text-center border border-border-light mb-8">
+          <h2 class="text-brand-dark font-extrabold text-xl md:text-2xl mb-3">Tu negocio en el mapa digital de los municipios</h2>
+          <p class="text-text-paragraph text-sm md:text-base mb-6 max-w-md mx-auto">
+            ¿Tienes un hotel, restaurante, tienda o servicio local en Viotá? Queremos que seas parte del lanzamiento de Munitrip con beneficios exclusivos para los primeros en unirse.
+          </p>
+          <a
+            href="https://wa.me/573227410781?text=Hola,%20quiero%20ser%20socio%20fundador%20de%20Munitrip"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-brand-dark text-white px-10 py-3 rounded-full text-sm md:text-base font-medium hover:bg-brand-dark-hover transition-colors shadow-sm"
+          >
+            Quiero ser socio fundador
+          </a>
+        </div>
+
+        <h2 class="text-brand-dark font-extrabold text-xl md:text-2xl mb-6">Beneficios de unirse hoy</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          {benefits.map((b) => (
+            <div class="bg-bg-general rounded-2xl p-5 border border-border-light">
+              <div class="text-3xl mb-2">{b.icon}</div>
+              <h3 class="text-text-title font-bold text-base md:text-lg mb-1">{b.title}</h3>
+              <p class="text-text-paragraph text-sm md:text-base leading-relaxed">{b.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="px-6 md:px-10 py-8 md:py-12 bg-bg-general border-t border-border-light">
+        <h2 class="text-brand-dark font-extrabold text-xl md:text-2xl text-center mb-8">Preguntas frecuentes para socios</h2>
+        <div class="max-w-lg mx-auto space-y-4">
+          {faqItems.map((item) => (
+            <details class="bg-bg-card rounded-xl border border-border-light overflow-hidden">
+              <summary class="px-5 py-4 text-sm md:text-base font-bold text-text-title cursor-pointer hover:bg-border-light/50 transition-colors">
+                {item.question}
+              </summary>
+              <p class="px-5 pb-4 text-sm md:text-base text-text-paragraph leading-relaxed">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="px-6 md:px-10 py-8 md:py-12 flex flex-col items-center text-center">
+        <h3 class="text-brand-dark font-bold text-lg md:text-xl mb-3">¿Listo para ser socio fundador?</h3>
+        <p class="text-text-paragraph text-sm md:text-base mb-6 max-w-sm">        Únete a Munitrip y posiciona tu negocio local de Viotá antes del lanzamiento.</p>
+        <a
+          href="https://wa.me/573227410781?text=Hola,%20quiero%20ser%20socio%20fundador%20de%20Munitrip"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-brand-dark text-white px-8 py-2.5 rounded-full text-sm md:text-base font-medium hover:bg-brand-dark-hover transition-colors shadow-sm"
+        >
+          Quiero ser socio fundador
+        </a>
+      </section>
+
+      <Footer />
+    </div>
+  </main>
+</Layout>

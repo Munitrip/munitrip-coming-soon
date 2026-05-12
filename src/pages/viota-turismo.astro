@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://munitrip.com';
+const canonical = `${siteUrl}/viota-turismo`;
+const title = 'Turismo en Viotá Cundinamarca - Lugares, gastronomía y naturaleza';
+const description = 'Descubre Viotá, Cundinamarca: un destino de naturaleza, gastronomía y cultura. Guía turística de Viotá por Munitrip, la plataforma que conecta contigo lo mejor de cada municipio de Colombia.';
+
+const sections = [
+  {
+    name: 'Naturaleza y Aventura',
+    description: 'Desde el refugio en el corazón del bosque en Monte La MaMa hasta rutas de senderismo inexploradas. Viotá es un paraíso natural esperando ser descubierto en Cundinamarca.',
+    keywords: ['Monte La MaMa', 'senderismo Viotá', 'ecoturismo Cundinamarca', 'naturaleza'],
+    icon: '🌿'
+  },
+  {
+    name: 'Sabor Local',
+    description: 'Experiencias culinarias únicas te esperan. Desde la parrilla artesanal hasta la cocina de autor, la gastronomía de Viotá refleja la riqueza de su tierra y su gente.',
+    keywords: ['gastronomía Viotá', 'restaurantes', 'comida típica Cundinamarca', 'cocina de autor'],
+    icon: '🍽️'
+  },
+  {
+    name: 'Cultura e Historia',
+    description: 'Un recorrido digital por el Centro Histórico de Viotá para valorar la arquitectura, las tradiciones y la calidez de su gente. La cultura cundinamarquesa en cada esquina.',
+    keywords: ['Centro Histórico Viotá', 'cultura', 'historia Cundinamarca', 'arquitectura'],
+    icon: '🏛️'
+  },
+  {
+    name: 'Ecoturismo y Hospedajes',
+    description: 'Alojamientos rurales, hospedajes con vista a la montaña y experiencias de ecoturismo en Viotá. El lugar perfecto para desconectar y reconectar con la naturaleza.',
+    keywords: ['hospedajes Viotá', 'alojamientos rurales', 'ecoturismo', 'turismo de naturaleza'],
+    icon: '🏡'
+  }
+];
+
+const activities = [
+  { icon: '🥾', title: 'Senderismo', desc: 'Explora montañas y senderos naturales en Viotá.' },
+  { icon: '🍽️', title: 'Gastronomía', desc: 'Sabores únicos de la cocina local cundinamarquesa.' },
+  { icon: '🏡', title: 'Hospedajes', desc: 'Alojamientos rurales con encanto y vista a la montaña.' },
+  { icon: '🎉', title: 'Eventos', desc: 'Festividades y celebraciones tradicionales.' },
+  { icon: '🛍️', title: 'Artesanías', desc: 'Productos locales y artesanías de la región.' },
+  { icon: '🌿', title: 'Ecoturismo', desc: 'Naturaleza en su estado más puro en Cundinamarca.' },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalURL={canonical}
+  jsonLd={[
+    {
+      "@type": "TouristAttraction",
+      "name": "Viotá, Cundinamarca",
+      "description": "Municipio turístico de Cundinamarca, Colombia. Conocido por su riqueza natural, gastronomía, cultura y tradiciones.",
+      "url": canonical,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Viotá",
+        "addressRegion": "Cundinamarca",
+        "addressCountry": "CO"
+      },
+      "areaServed": ["Viotá", "Cundinamarca", "Colombia"],
+      "inLanguage": "es-CO"
+    },
+    {
+      "@type": "ItemList",
+      "name": "Categorías turísticas de Viotá",
+      "description": "Lo que podrás descubrir en Viotá, Cundinamarca a través de Munitrip",
+      "numberOfItems": sections.length,
+      "itemListElement": sections.map((s, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": s.name,
+        "description": s.description
+      }))
+    }
+  ]}
+>
+  <main class="min-h-screen bg-bg-general font-inter flex flex-col items-center">
+    <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl 2xl:max-w-4xl bg-bg-card min-h-screen flex flex-col shadow-xl">
+      <Header activePage="viota-turismo" />
+
+      <section class="px-6 md:px-10 py-8 md:py-12">
+        <h1 class="text-brand-dark font-extrabold text-2xl md:text-3xl lg:text-4xl text-center">Turismo en Viotá, Cundinamarca</h1>
+        <p class="text-text-paragraph text-center mt-3 text-sm md:text-base max-w-xl mx-auto">
+          Descubre <strong>Viotá, Cundinamarca</strong>, a través de Munitrip, la plataforma que conecta turistas y habitantes con lo mejor de cada destino de <strong>Colombia</strong>. Aquí te mostramos un vistazo de todo lo que este municipio tiene para ofrecer.
+        </p>
+
+        <div class="w-20 h-[3px] rounded-full mx-auto my-6 bg-brand-dark"></div>
+
+        <h2 class="text-brand-dark font-extrabold text-xl md:text-2xl mb-6">Un vistazo a lo que viene</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {sections.map((s) => (
+            <article class="bg-bg-general rounded-2xl p-5 border border-border-light">
+              <div class="text-3xl mb-2">{s.icon}</div>
+              <h3 class="text-text-title font-extrabold text-base md:text-lg mb-2">{s.name}</h3>
+              <p class="text-text-paragraph text-sm md:text-base leading-relaxed">{s.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="px-6 md:px-10 py-8 md:py-12 bg-bg-general border-t border-border-light">
+        <h2 class="text-brand-dark font-extrabold text-xl md:text-2xl mb-6 text-center">Actividades que podrás disfrutar</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {activities.map((a) => (
+            <div class="bg-bg-card rounded-2xl p-4 border border-border-light text-center">
+              <div class="text-3xl mb-2">{a.icon}</div>
+              <h3 class="text-text-title font-bold text-sm md:text-base mb-1">{a.title}</h3>
+              <p class="text-text-paragraph text-xs md:text-sm leading-relaxed">{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="px-6 md:px-10 py-8 md:py-12 bg-gradient-to-b from-brand-dark/5 to-transparent flex flex-col items-center text-center border-t border-border-light">
+        <h3 class="text-brand-dark font-bold text-lg md:text-xl mb-3">¿Tienes un negocio local?</h3>
+        <p class="text-text-paragraph text-sm md:text-base mb-6 max-w-sm">Forma parte de nuestra red de socios fundadores y sé parte del crecimiento de este destino.</p>
+        <a
+          href="https://wa.me/573227410781?text=Hola,%20quiero%20ser%20socio%20fundador%20de%20Munitrip"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-brand-dark text-white px-8 py-2.5 rounded-full text-sm md:text-base font-medium hover:bg-brand-dark-hover transition-colors shadow-sm"
+        >
+          Quiero ser socio fundador
+        </a>
+      </section>
+
+      <Footer />
+    </div>
+  </main>
+</Layout>

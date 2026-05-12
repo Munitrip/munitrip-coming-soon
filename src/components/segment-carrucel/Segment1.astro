@@ -11,20 +11,20 @@ const { hero1 } = Astro.props;
 
 <div class="min-w-full snap-center bg-bg-card shrink-0 flex flex-col">
   <!-- Títulos: Estáticos -->
-  <div class="w-full flex flex-col items-center text-center px-1 py-7">
-    <h3 class="text-text-secondary font-extrabold text-[16px] -mb-1.5">
-      Encuentra todo en un solo lugar
-    </h3>
-    <h2 class="text-text-title font-extrabold text-[22px] leading-tight">
+  <div class="w-full flex flex-col items-center text-center px-1 py-7 md:py-9 lg:py-11 xl:py-14 2xl:py-16">
+    <h2 class="text-text-title font-extrabold text-[22px] md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-tight">
       Planifica, visita, descubre
     </h2>
+    <h3 class="text-text-secondary font-extrabold text-[16px] md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl -mb-1.5">
+      Encuentra todo en un solo lugar
+    </h3>
   </div>
 
   <!-- Imagen Hero: Dinámica -->
-  <div class="relative w-full h-50 bg-gray-200 overflow-hidden">
+  <div class="relative w-full h-50 md:h-64 lg:h-72 xl:h-80 2xl:h-96 bg-gray-200 overflow-hidden">
     <Image
       src={hero1}
-      alt="Imagen descriptiva del municipio"
+      alt="Vista panorámica del municipio de Viotá, Cundinamarca - naturaleza y paisaje colombiano"
       class="w-full h-full object-cover"
     />
     <div
@@ -34,13 +34,13 @@ const { hero1 } = Astro.props;
   </div>
 
   <!-- Grid de Categorías: Estático -->
-  <div class="grid grid-cols-5 w-full py-5 px-1 bg-bg-card">
+  <div class="grid grid-cols-5 w-full py-5 md:py-8 lg:py-10 px-1 bg-bg-card">
     <!-- Alojamientos -->
     <div class="flex flex-col items-center justify-center w-full gap-1.5">
       <svg
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        class="w-[26px] h-[26px] text-text-title"
+        class="w-[26px] h-[26px] md:w-8 md:h-8 lg:w-10 lg:h-10 text-text-title"
       >
         <path
           fill="currentColor"
@@ -48,7 +48,7 @@ const { hero1 } = Astro.props;
         ></path>
       </svg>
       <span
-        class="text-[9px] font-medium text-text-title text-center leading-tight"
+        class="text-[9px] md:text-xs lg:text-sm font-medium text-text-title text-center leading-tight"
         >Alojamientos</span
       >
     </div>
@@ -58,7 +58,7 @@ const { hero1 } = Astro.props;
       <svg
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        class="w-[26px] h-[26px] text-text-title"
+        class="w-[26px] h-[26px] md:w-8 md:h-8 lg:w-10 lg:h-10 text-text-title"
       >
         <path
           fill="currentColor"
@@ -66,7 +66,7 @@ const { hero1 } = Astro.props;
         ></path>
       </svg>
       <span
-        class="text-[9px] font-medium text-text-title text-center leading-tight"
+        class="text-[9px] md:text-xs lg:text-sm font-medium text-text-title text-center leading-tight"
         >Restaurantes</span
       >
     </div>
@@ -76,7 +76,7 @@ const { hero1 } = Astro.props;
       <svg
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        class="w-[26px] h-[26px] text-text-title"
+        class="w-[26px] h-[26px] md:w-8 md:h-8 lg:w-10 lg:h-10 text-text-title"
       >
         <path
           fill="currentColor"
@@ -84,7 +84,7 @@ const { hero1 } = Astro.props;
         ></path>
       </svg>
       <span
-        class="text-[9px] font-medium text-text-title text-center leading-tight"
+        class="text-[9px] md:text-xs lg:text-sm font-medium text-text-title text-center leading-tight"
         >Experiencias</span
       >
     </div>
@@ -94,7 +94,7 @@ const { hero1 } = Astro.props;
       <svg
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        class="w-[26px] h-[26px] text-text-title"
+        class="w-[26px] h-[26px] md:w-8 md:h-8 lg:w-10 lg:h-10 text-text-title"
       >
         <path
           fill="currentColor"
@@ -102,7 +102,7 @@ const { hero1 } = Astro.props;
         ></path>
       </svg>
       <span
-        class="text-[9px] font-medium text-text-title text-center leading-tight"
+        class="text-[9px] md:text-xs lg:text-sm font-medium text-text-title text-center leading-tight"
         >Tiendas</span
       >
     </div>
@@ -112,7 +112,7 @@ const { hero1 } = Astro.props;
       <svg
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
-        class="w-[26px] h-[26px] text-text-title"
+        class="w-[26px] h-[26px] md:w-8 md:h-8 lg:w-10 lg:h-10 text-text-title"
       >
         <path
           fill="currentColor"
@@ -120,7 +120,7 @@ const { hero1 } = Astro.props;
         ></path>
       </svg>
       <span
-        class="text-[9px] font-medium text-text-title text-center leading-tight"
+        class="text-[9px] md:text-xs lg:text-sm font-medium text-text-title text-center leading-tight"
         >Rumba</span
       >
     </div>

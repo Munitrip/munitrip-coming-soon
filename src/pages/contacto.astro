@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://munitrip.com';
+const canonical = `${siteUrl}/contacto`;
+const title = 'Contacto - Munitrip';
+const description = 'Ponte en contacto con Munitrip. Escríbenos por WhatsApp, email o síguenos en redes sociales. Conectamos turistas con lo mejor de cada municipio de Colombia.';
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalURL={canonical}
+  jsonLd={[
+    {
+      "@type": "ContactPage",
+      "@id": `${canonical}#contactpage`,
+      "url": canonical,
+      "name": "Contacto Munitrip",
+      "description": "Página de contacto de Munitrip",
+      "isPartOf": { "@id": `${siteUrl}/#website` }
+    }
+  ]}
+>
+  <main class="min-h-screen bg-bg-general font-inter flex flex-col items-center">
+    <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl 2xl:max-w-4xl bg-bg-card min-h-screen flex flex-col shadow-xl">
+      <Header activePage="contacto" />
+
+      <div class="px-6 md:px-10 py-8 md:py-12">
+        <h1 class="text-brand-dark font-extrabold text-2xl md:text-3xl lg:text-4xl text-center">Contacto</h1>
+        <p class="text-text-paragraph text-center mt-3 text-sm md:text-base max-w-lg mx-auto">
+          Estamos aquí para ayudarte. Elige el canal que prefieras y hablemos.
+        </p>
+
+        <div class="w-20 h-[3px] rounded-full mx-auto my-6 bg-brand-dark"></div>
+
+        <div class="grid gap-6 max-w-md mx-auto">
+          <a
+            href="https://wa.me/573227410781?text=Hola,%20quiero%20información%20sobre%20Munitrip"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 bg-bg-general rounded-2xl p-5 border border-border-light hover:border-brand-dark/30 transition-colors"
+          >
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl shrink-0">
+              💬
+            </div>
+            <div>
+              <h2 class="text-text-title font-bold text-base md:text-lg">WhatsApp</h2>
+              <p class="text-text-paragraph text-sm">+57 322 741 0781</p>
+            </div>
+          </a>
+
+          <a
+            href="mailto:contacto@munitrip.com"
+            class="flex items-center gap-4 bg-bg-general rounded-2xl p-5 border border-border-light hover:border-brand-dark/30 transition-colors"
+          >
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl shrink-0">
+              ✉️
+            </div>
+            <div>
+              <h2 class="text-text-title font-bold text-base md:text-lg">Email</h2>
+              <p class="text-text-paragraph text-sm">contacto@munitrip.com</p>
+            </div>
+          </a>
+
+          <a
+            href="https://www.instagram.com/munitrip.co"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 bg-bg-general rounded-2xl p-5 border border-border-light hover:border-brand-dark/30 transition-colors"
+          >
+            <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-2xl shrink-0">
+              📸
+            </div>
+            <div>
+              <h2 class="text-text-title font-bold text-base md:text-lg">Instagram</h2>
+              <p class="text-text-paragraph text-sm">@munitrip.co</p>
+            </div>
+          </a>
+
+          <a
+            href="https://www.facebook.com/share/1BAB49K6F8"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 bg-bg-general rounded-2xl p-5 border border-border-light hover:border-brand-dark/30 transition-colors"
+          >
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl shrink-0">
+              👍
+            </div>
+            <div>
+              <h2 class="text-text-title font-bold text-base md:text-lg">Facebook</h2>
+              <p class="text-text-paragraph text-sm">Munitrip</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="px-6 md:px-10 py-8 md:py-12 bg-bg-general border-t border-border-light text-center">
+        <h2 class="text-brand-dark font-extrabold text-xl md:text-2xl mb-3">Ubicación</h2>
+        <p class="text-text-paragraph text-sm md:text-base max-w-sm mx-auto">
+          Conectamos turistas y habitantes con lo mejor de cada municipio de Colombia.
+        </p>
+      </div>
+
+      <Footer />
+    </div>
+  </main>
+</Layout>

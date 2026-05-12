@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import logoMunitrip from '../assets/logo.webp';
+
+interface Props {
+  activePage?: 'inicio' | 'como-funciona' | 'viota-turismo' | 'para-negocios' | 'contacto';
+}
+
+const { activePage } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Inicio', id: 'inicio' as const },
+  { href: '/como-funciona', label: 'Cómo funciona', id: 'como-funciona' as const },
+  { href: '/viota-turismo', label: 'Viotá Turismo', id: 'viota-turismo' as const },
+  { href: '/para-negocios', label: 'Para negocios', id: 'para-negocios' as const },
+  { href: '/contacto', label: 'Contacto', id: 'contacto' as const },
+];
+---
+
+<header class="pt-8 pb-1 md:pt-10 md:pb-3 flex flex-col items-center bg-bg-card">
+  <a href="/" aria-label="Munitrip - Ir al inicio" class="flex flex-col items-center">
+    <div class="h-20 md:h-28 lg:h-32 flex items-center justify-center">
+      <Image
+        src={logoMunitrip}
+        alt="Munitrip - Tu guía de turismo local para los municipios de Colombia"
+        class="h-full w-auto max-w-[200px] md:max-w-[280px] lg:max-w-[320px] object-contain"
+      />
+    </div>
+  </a>
+
+  <nav class="w-full overflow-x-auto scrollbar-none" aria-label="Navegación principal">
+    <div class="flex justify-start items-center py-3 md:py-8 lg:py-10 xl:py-12 2xl:py-14 pl-6 pr-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14">
+      {navLinks.map((link) => {
+        const isActive = activePage === link.id;
+        return (
+          <a
+            href={link.href}
+            class={`shrink-0 transition-colors whitespace-nowrap ${
+              isActive
+                ? 'text-text-title border-b-2 border-text-title pb-1'
+                : 'text-text-secondary hover:text-text-title'
+            }`}
+          >
+            <span class="text-[13px] md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-bold">{link.label}</span>
+          </a>
+        );
+      })}
+    </div>
+  </nav>
+</header>
+
+<style>
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
