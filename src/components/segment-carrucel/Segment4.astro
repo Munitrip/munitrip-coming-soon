@@ -44,8 +44,10 @@ const { icono } = Astro.props;
           src={hero4}
           alt="Petronio Cocina de Autor - restaurante destacado en Viotá, Cundinamarca"
           class="w-full h-full object-cover rounded-2xl shadow-md"
-          width={1844}
-          height={1049}
+          width={640}
+          height={364}
+          sizes="(max-width: 768px) 320px, 400px"
+          widths={[320, 480, 640]}
           loading="lazy"
           decoding="async"
         />
@@ -87,6 +89,7 @@ const { icono } = Astro.props;
               height={32}
               loading="lazy"
               decoding="async"
+              fetchpriority="low"
             />
             <span class="text-[9px] font-semibold text-white"
               >Recomendados</span
