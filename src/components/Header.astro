@@ -17,31 +17,36 @@ const navLinks = [
 ];
 ---
 
-<header class="pt-8 pb-1 md:pt-10 md:pb-3 flex flex-col items-center bg-bg-card">
+<header class="pt-6 pb-1 md:pt-8 md:pb-2 flex flex-col items-center bg-bg-card">
   <a href="/" aria-label="Munitrip - Ir al inicio" class="flex flex-col items-center">
-    <div class="h-20 md:h-28 lg:h-32 flex items-center justify-center">
+    <div class="h-16 md:h-20 lg:h-20 flex items-center justify-center">
       <Image
         src={logoMunitrip}
         alt="Munitrip - Tu guía de turismo local para los municipios de Colombia"
-        class="h-full w-auto max-w-[200px] md:max-w-[280px] lg:max-w-[320px] object-contain"
+        class="h-full w-auto max-w-[140px] md:max-w-[180px] lg:max-w-[200px] object-contain"
+        width={2000}
+        height={801}
+        loading="eager"
+        decoding="sync"
       />
     </div>
   </a>
 
-  <nav class="w-full overflow-x-auto scrollbar-none" aria-label="Navegación principal">
-    <div class="flex justify-start items-center py-3 md:py-8 lg:py-10 xl:py-12 2xl:py-14 pl-6 pr-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14">
+  <nav class="w-full overflow-x-auto scrollbar-none border-b border-border-light" aria-label="Navegación principal">
+    <div class="nav-container flex items-center py-3 md:py-6 lg:py-8 pl-8 pr-5 md:pl-6 md:pr-4 gap-4 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-8 w-max min-w-full md:min-w-0 md:mx-auto">
       {navLinks.map((link) => {
         const isActive = activePage === link.id;
         return (
           <a
             href={link.href}
-            class={`shrink-0 transition-colors whitespace-nowrap ${
+            aria-current={isActive ? 'page' : undefined}
+            class={`shrink-0 transition-colors whitespace-nowrap py-1 ${
               isActive
-                ? 'text-text-title border-b-2 border-text-title pb-1'
+                ? 'text-text-title border-b-2 border-text-title'
                 : 'text-text-secondary hover:text-text-title'
             }`}
           >
-            <span class="text-[13px] md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-bold">{link.label}</span>
+            <span class="text-xs lg:text-sm xl:text-base font-bold">{link.label}</span>
           </a>
         );
       })}
@@ -56,5 +61,10 @@ const navLinks = [
   .scrollbar-none {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-container {
+    flex-wrap: nowrap;
   }
 </style>

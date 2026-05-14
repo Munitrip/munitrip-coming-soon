@@ -7,6 +7,7 @@ const siteUrl = 'https://munitrip.com';
 const canonical = `${siteUrl}/viota-turismo`;
 const title = 'Turismo en Viotá Cundinamarca - Lugares, gastronomía y naturaleza';
 const description = 'Descubre Viotá, Cundinamarca: un destino de naturaleza, gastronomía y cultura. Guía turística de Viotá por Munitrip, la plataforma que conecta contigo lo mejor de cada municipio de Colombia.';
+const keywords = 'Viotá turismo, hoteles en Viotá, restaurantes en Viotá, qué hacer en Viotá, alojamientos Viotá, hospedajes Viotá, ecoturismo Viotá, Monte La MaMa Viotá, gastronomía Viotá, Centro Histórico Viotá, senderismo Viotá, turismo rural Cundinamarca, planes en Viotá, cabañas Viotá, comida típica Viotá, Cundinamarca turismo, naturaleza Viotá, fincas turísticas Viotá, posadas Viotá, guía turística Viotá';
 
 const sections = [
   {
@@ -48,7 +49,12 @@ const activities = [
 <Layout
   title={title}
   description={description}
+  keywords={keywords}
   canonicalURL={canonical}
+  breadcrumbs={[
+    { name: 'Inicio', url: siteUrl },
+    { name: 'Viotá Turismo', url: canonical }
+  ]}
   jsonLd={[
     {
       "@type": "TouristAttraction",
@@ -79,13 +85,13 @@ const activities = [
   ]}
 >
   <main class="min-h-screen bg-bg-general font-inter flex flex-col items-center">
-    <div class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl 2xl:max-w-4xl bg-bg-card min-h-screen flex flex-col shadow-xl">
+    <div class="w-full md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl bg-bg-card min-h-screen flex flex-col shadow-xl">
       <Header activePage="viota-turismo" />
 
       <section class="px-6 md:px-10 py-8 md:py-12">
-        <h1 class="text-brand-dark font-extrabold text-2xl md:text-3xl lg:text-4xl text-center">Turismo en Viotá, Cundinamarca</h1>
+        <h1 class="text-brand-dark font-extrabold text-2xl md:text-3xl lg:text-4xl text-center leading-tight">Turismo en Viotá, Cundinamarca</h1>
         <p class="text-text-paragraph text-center mt-3 text-sm md:text-base max-w-xl mx-auto">
-          Descubre <strong>Viotá, Cundinamarca</strong>, a través de Munitrip, la plataforma que conecta turistas y habitantes con lo mejor de cada destino de <strong>Colombia</strong>. Aquí te mostramos un vistazo de todo lo que este municipio tiene para ofrecer.
+          Descubre <strong>Viotá, Cundinamarca</strong>, a través de Munitrip, la plataforma que conecta turistas y habitantes con lo mejor de cada destino de <strong>Colombia</strong>. Aquí te mostramos un vistazo de todo lo que este municipio tiene para ofrecer. <a href="/como-funciona" class="font-semibold text-brand-dark underline underline-offset-2 hover:opacity-70 transition-opacity">Conoce cómo funciona Munitrip</a> y si tienes un negocio local, <a href="/para-negocios" class="font-semibold text-brand-dark underline underline-offset-2 hover:opacity-70 transition-opacity">sé socio fundador</a>.
         </p>
 
         <div class="w-20 h-[3px] rounded-full mx-auto my-6 bg-brand-dark"></div>

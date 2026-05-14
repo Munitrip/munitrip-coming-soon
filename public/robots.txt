@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://munitrip.com/sitemap.xml
+Sitemap: https://munitrip.com/sitemap-index.xml
