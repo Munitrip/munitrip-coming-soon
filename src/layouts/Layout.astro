@@ -2,23 +2,31 @@
 import '../styles/global.css';
 
 interface Props {
-	title: string;
-	description?: string;
-	ogImage?: string;
-	ogType?: string;
-	canonicalURL?: string;
-	noIndex?: boolean;
-	jsonLd?: Record<string, unknown>[];
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalURL?: string;
+  noIndex?: boolean;
+  jsonLd?: Record<string, unknown>[];
+  breadcrumbs?: { name: string; url: string }[];
+  geo?: { lat: string; lng: string; region: string; place: string };
+  googleVerification?: string;
+  keywords?: string;
 }
 
 const {
-	title,
-	description = 'Munitrip es la plataforma que conecta turistas y habitantes con lo mejor de Viotá, Cundinamarca, y cada municipio de Colombia. Alojamientos, restaurantes, experiencias y más en un solo lugar.',
-	ogImage = '/og-image.png',
-	ogType = 'website',
-	canonicalURL = 'https://munitrip.com/',
-	noIndex = false,
-	jsonLd = [],
+  title,
+  description = 'Munitrip es la plataforma que conecta turistas y habitantes con lo mejor de Viotá, Cundinamarca, y cada municipio de Colombia. Alojamientos, restaurantes, experiencias y más en un solo lugar.',
+  ogImage = '/og-image.png',
+  ogType = 'website',
+  canonicalURL = 'https://munitrip.com/',
+  noIndex = false,
+  jsonLd = [],
+  breadcrumbs = [],
+  geo = { lat: '4.4376', lng: '-74.4754', region: 'CO-CUN', place: 'Viotá, Cundinamarca' },
+  googleVerification,
+  keywords = 'turismo Colombia, municipios Colombia, turismo local, Viotá, Cundinamarca, hoteles en Viotá, restaurantes en Viotá, alojamientos rurales Cundinamarca, guía turística Colombia, hospedajes Viotá, ecoturismo Cundinamarca, qué hacer en Viotá, turismo municipal Colombia, destinos Colombia, viajes Colombia, naturaleza Cundinamarca, gastronomía Viotá, Monte La MaMa, Centro Histórico Viotá, planes en Viotá, turismo de naturaleza',
 } = Astro.props;
 
 const siteUrl = 'https://munitrip.com';
@@ -45,6 +53,14 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 		<meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
 		<meta name="language" content="es" />
 		<meta name="author" content="Munitrip" />
+		<meta name="keywords" content={keywords} />
+		{geo && <>
+			<meta name="geo.position" content={`${geo.lat};${geo.lng}`} />
+			<meta name="geo.region" content={geo.region} />
+			<meta name="geo.placename" content={geo.place} />
+			<meta name="ICBM" content={`${geo.lat}, ${geo.lng}`} />
+		</>}
+		{googleVerification && <meta name="google-site-verification" content={googleVerification} />}
 
 		{/* Canonical */}
 		<link rel="canonical" href={canonicalURL} />
@@ -58,6 +74,8 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:secure_url" content={ogImageUrl} />
+		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:url" content={canonicalURL} />
@@ -68,6 +86,7 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 		{/* Twitter Card */}
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@Munitrip_co" />
+		<meta name="twitter:creator" content="@Munitrip_co" />
 		<meta name="twitter:title" content={pageTitle} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
@@ -79,16 +98,25 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
 
+		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
 		{/* JSON-LD Structured Data */}
 		<script type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@graph": [
 				{
-					"@type": "Organization",
+					"@type": ["Organization", "TouristInformationCenter"],
 					"@id": `${siteUrl}/#organization`,
 					"name": "Munitrip",
 					"url": siteUrl,
-					"logo": `${siteUrl}/og-image.png`,
+					"logo": {
+						"@type": "ImageObject",
+						"url": `${siteUrl}/og-image.png`,
+						"width": 1200,
+						"height": 630
+					},
+					"slogan": "Tu guía de turismo local para los municipios de Colombia",
 					"description": "Plataforma que conecta turistas y habitantes con lo mejor de Viotá, Cundinamarca, y cada municipio de Colombia.",
 					"address": {
 						"@type": "PostalAddress",
@@ -96,6 +124,17 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 						"addressRegion": "Cundinamarca",
 						"addressCountry": "CO"
 					},
+					"geo": {
+						"@type": "GeoCoordinates",
+						"latitude": geo.lat,
+						"longitude": geo.lng
+					},
+					"foundingDate": "2026",
+					"foundingLocation": {
+						"@type": "Place",
+						"name": "Viotá, Cundinamarca, Colombia"
+					},
+					"knowsAbout": ["Turismo local", "Turismo municipal", "Guía turística", "Alojamientos", "Restaurantes", "Experiencias turísticas"],
 					"sameAs": [
 						"https://www.facebook.com/share/1BAB49K6F8",
 						"https://www.instagram.com/munitrip.co",
@@ -128,11 +167,20 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 					"url": canonicalURL,
 					"name": pageTitle,
 					"description": description,
+					"keywords": keywords,
 					"isPartOf": { "@id": `${siteUrl}/#website` },
 					"about": { "@id": `${siteUrl}/#organization` },
+					"mainEntity": { "@id": `${siteUrl}/#organization` },
 					"inLanguage": "es-CO",
 					"datePublished": "2026-01-01",
-					"dateModified": "2026-05-11"
+					"dateModified": new Date().toISOString().split('T')[0],
+					...(breadcrumbs.length > 0 ? { "breadcrumb": { "@id": `${canonicalURL}#breadcrumb` } } : {}),
+					"primaryImageOfPage": {
+						"@type": "ImageObject",
+						"url": ogImageUrl,
+						"width": 1200,
+						"height": 630
+					}
 				},
 				{
 					"@type": "LocalBusiness",
@@ -140,20 +188,45 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 					"name": "Munitrip",
 					"description": "Plataforma de turismo local para Viotá, Cundinamarca, y cada municipio de Colombia.",
 					"url": siteUrl,
+					"parentOrganization": { "@id": `${siteUrl}/#organization` },
 					"address": {
 						"@type": "PostalAddress",
 						"addressLocality": "Viotá",
 						"addressRegion": "Cundinamarca",
 						"addressCountry": "CO"
 					},
-					"areaServed": ["Viotá", "Cundinamarca", "Colombia"],
+					"geo": {
+						"@type": "GeoCoordinates",
+						"latitude": geo.lat,
+						"longitude": geo.lng
+					},
+					"areaServed": [
+						{ "@type": "City", "name": "Viotá" },
+						{ "@type": "State", "name": "Cundinamarca" },
+						{ "@type": "Country", "name": "Colombia" }
+					],
 					"priceRange": "$$"
 				},
+				...(breadcrumbs.length > 0 ? [{
+					"@type": "BreadcrumbList",
+					"@id": `${canonicalURL}#breadcrumb`,
+					"itemListElement": breadcrumbs.map((b, i) => ({
+						"@type": "ListItem",
+						"position": i + 1,
+						"name": b.name,
+						"item": b.url
+					}))
+				}] : []),
 				...jsonLd
 			]
 		})} />
 	</head>
-	<body>
+	<body itemscope itemtype="https://schema.org/WebPage">
+		<meta itemprop="name" content={pageTitle} />
+		<meta itemprop="description" content={description} />
+		<link itemprop="url" href={canonicalURL} />
+		<meta itemprop="inLanguage" content="es-CO" />
+		<meta itemprop="primaryImageOfPage" content={ogImageUrl} />
 		<slot />
 	</body>
 </html>
