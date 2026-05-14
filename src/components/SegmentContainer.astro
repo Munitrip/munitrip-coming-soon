@@ -1,9 +1,12 @@
 ---
-// SegmentContainer.astro
+interface Props {
+  segmentCount?: number;
+}
+
+const { segmentCount = 5 } = Astro.props;
 ---
 
 <div class="w-full bg-bg-general pt-8 md:pt-10 lg:pt-12">
-  <!-- Contenedor del carrusel -->
   <div
     id="carousel-container"
     class="flex border-t-2 border-b-2 border-border-light shadow-sm overflow-x-auto snap-x snap-mandatory rounded-3xl no-scrollbar"
@@ -11,8 +14,18 @@
     <slot />
   </div>
 
-  <!-- Indicadores de posición (Dots) -->
-  <div id="dots-container" class="flex justify-center gap-3 py-3"></div>
+  <!-- renderizados en servidor para evitar CLS -->
+  <div id="dots-container" class="flex justify-center gap-3 py-3">
+    {
+      Array.from({ length: segmentCount }, (_, i) => (
+        <div
+          class="dot w-3 h-3 rounded-full bg-border-light transition-all duration-300"
+          style="cursor:pointer"
+          data-index={i}
+        />
+      ))
+    }
+  </div>
 </div>
 
 <style>
@@ -27,7 +40,6 @@
 </style>
 
 <script>
-  // Definimos la lógica con Tipado de TypeScript
   const initCarousel = () => {
     const container = document.getElementById(
       'carousel-container'
@@ -38,27 +50,16 @@
 
     if (!container || !dotsContainer) return;
 
-    // Contar el número de segmentos (children del carousel)
     const segmentCount = container.children.length;
     let autoScrollInterval: ReturnType<typeof setInterval> | null = null;
     let isAutoScrolling = true;
 
-    // Generar dots dinámicamente
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < segmentCount; i++) {
-      const dot = document.createElement('div');
-      dot.className =
-        'dot w-3 h-3 rounded-full bg-border-light transition-all duration-300';
-      dot.style.cursor = 'pointer';
-      dotsContainer.appendChild(dot);
-    }
-
+    // Dots already server-rendered — just select them
     const dots = dotsContainer.querySelectorAll(
       '.dot'
     ) as NodeListOf<HTMLDivElement>;
 
     const updateDots = (): void => {
-      // Calculamos el índice actual
       const scrollPos = container.scrollLeft;
       const width = container.clientWidth;
       const index = Math.round(scrollPos / width);
@@ -95,7 +96,7 @@
         const currentIndex = getCurrentIndex();
         const nextIndex = (currentIndex + 1) % segmentCount;
         scrollToIndex(nextIndex);
-      }, 4000); // Cambia a la siguiente card cada 5 segundos
+      }, 4000);
     };
 
     const stopAutoScroll = (): void => {
@@ -105,14 +106,14 @@
       }
     };
 
-    // Evento de scroll manual - pausa auto-scroll
+    // Pause auto-scroll on manual scroll
     container.addEventListener('scroll', () => {
       updateDots();
       if (isAutoScrolling) {
         stopAutoScroll();
         isAutoScrolling = false;
 
-        // Reanudar auto-scroll después de 8 segundos de inactividad
+        // Resume after inactivity
         setTimeout(() => {
           if (!isAutoScrolling) {
             isAutoScrolling = true;
@@ -122,14 +123,14 @@
       }
     });
 
-    // Click en dots para navegar
+    // Click on dots to navigate
     dots.forEach((dot, i) => {
       dot.addEventListener('click', () => {
         stopAutoScroll();
         isAutoScrolling = false;
         scrollToIndex(i);
 
-        // Reanudar auto-scroll después de 8 segundos
+        // Resume after inactivity
         setTimeout(() => {
           if (!isAutoScrolling) {
             isAutoScrolling = true;
@@ -139,16 +140,15 @@
       });
     });
 
-    // Ejecutar al inicio para marcar el primer dot
     updateDots();
 
-    // Iniciar auto-scroll
-    startAutoScroll();
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      startAutoScroll();
+    }
   };
 
-  // Ejecutar cuando Astro hidrata el script
   initCarousel();
 
-  // Opcional: Re-ejecutar si usas ViewTransitions
+  // Re-run on ViewTransitions navigation
   document.addEventListener('astro:page-load', initCarousel);
 </script>

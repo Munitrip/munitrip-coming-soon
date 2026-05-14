@@ -1,12 +1,10 @@
 ---
-// Segment1.astro
 import { Image } from 'astro:assets';
 
 interface Props {
   hero4: ImageMetadata;
   hero4Profile: ImageMetadata;
   icono: ImageMetadata;
-  // Solo pasamos la imagen como prop
 }
 
 const { hero4 } = Astro.props;
@@ -14,20 +12,19 @@ const { hero4Profile } = Astro.props;
 const { icono } = Astro.props;
 ---
 
-<!-- SEGMENTO 2: Ajustado para evitar desbordamiento al aumentar tamaños -->
 <div
   class="min-w-full snap-center bg-bg-card shrink-0 flex flex-col overflow-hidden backface-hidden transform-gpu"
 >
   <div
-    class="w-full flex flex-col items-center shadow-sm text-center px-1 py-7 md:py-9 lg:py-11 xl:py-14 2xl:py-16 border-b-2 border-border-light"
+    class="w-full flex flex-col items-center shadow-sm text-center px-1 py-5 md:py-7 lg:py-8 border-b-2 border-border-light"
   >
     <h2
-      class="text-text-title font-extrabold text-[22px] md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-tight antialiased"
+      class="text-text-title font-extrabold text-xl md:text-2xl lg:text-3xl leading-tight antialiased"
     >
       Perfiles de negocios
     </h2>
     <h3
-      class="text-text-secondary font-extrabold text-[16px] md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl -mb-1.5 antialiased"
+      class="text-text-secondary font-extrabold text-base md:text-lg antialiased"
     >
       Información de los establecimientos
     </h3>
@@ -37,33 +34,37 @@ const { icono } = Astro.props;
     class="relative w-full h-full bg-bg-general flex flex-col items-center justify-center"
   >
     <div
-      class="w-full max-w-[360px] md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto flex items-center justify-center z-10 drop-shadow-2xl h-[230px] md:h-[280px] lg:h-[320px] xl:h-[380px] 2xl:h-[440px]"
+      class="w-full max-w-[320px] sm:max-w-sm md:max-w-md mx-auto flex items-center justify-center z-10 drop-shadow-2xl h-[200px] md:h-[240px] lg:h-[280px]"
       style="position:relative; margin-top:-16px; margin-bottom:-24px;"
     >
       <div
-        class="w-full h-full rounded-3xl shadow-lg shadow-black/20 bg-white relative"
+        class="w-full h-full rounded-2xl shadow-lg shadow-black/20 bg-white relative"
       >
         <Image
           src={hero4}
           alt="Petronio Cocina de Autor - restaurante destacado en Viotá, Cundinamarca"
-          class="w-full h-full object-cover rounded-3xl shadow-md"
+          class="w-full h-full object-cover rounded-2xl shadow-md"
+          width={1844}
+          height={1049}
+          loading="eager"
+          decoding="sync"
         />
 
         <div
-          class="absolute rounded-3xl inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-black/20"
+          class="absolute rounded-2xl inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-black/20"
         >
         </div>
 
         <div
-          class="absolute top-4 left-4 right-4 flex justify-between items-center z-20"
+          class="absolute top-3 left-3 right-3 flex justify-between items-center z-20"
         >
           <button
-            class="p-2 bg-text-title/70 backdrop-blur-md rounded-full text-white hover:bg-black/60 transition-colors"
+            class="p-1.5 bg-text-title/70 backdrop-blur-md rounded-full text-white hover:bg-black/60 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -76,25 +77,29 @@ const { icono } = Astro.props;
           </button>
 
           <div
-            class="flex items-center -top-4 gap-1.5 px-3 py-1 bg-text-title backdrop-blur-md rounded-full"
+            class="flex items-center -top-4 gap-1 px-2 py-0.5 bg-text-title backdrop-blur-md rounded-full"
           >
             <Image
               src={icono}
               alt="Munitrip - Recomendados"
-              class="w-5 h-5 rounded-full object-cover"
+              class="w-4 h-4 rounded-full object-cover"
+              width={2000}
+              height={2000}
+              loading="eager"
+              decoding="sync"
             />
-            <span class="text-[10px] font-semibold text-white"
+            <span class="text-[9px] font-semibold text-white"
               >Recomendados</span
             >
           </div>
 
           <button
-            class="p-2 bg-text-title/70 backdrop-blur-md rounded-full text-white hover:bg-black/60 transition-colors"
+            class="p-1.5 bg-text-title/70 backdrop-blur-md rounded-full text-white hover:bg-black/60 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -113,23 +118,27 @@ const { icono } = Astro.props;
       </div>
 
       <div
-        class="absolute w-[85%] md:w-[80%] lg:w-[75%] -bottom-9 border-b-2 border-border-light bg-white rounded-t-[35px] pt-4 px-5 pb-4 z-20 shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.1)]"
+        class="absolute w-[85%] md:w-[80%] -bottom-8 border-b-2 border-border-light bg-white rounded-t-[30px] pt-3 px-4 pb-3 z-20 shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.1)]"
       >
-        <div class="relative px-2 flex justify-around z-21 -mt-10">
+        <div class="relative px-2 flex justify-around z-21 -mt-8">
           <div class="p-1 border-b-2 border-border-light bg-white rounded-full">
-            <div class="w-12 h-12 bg-slate-200 rounded-full overflow-hidden">
+            <div class="w-10 h-10 bg-slate-200 rounded-full overflow-hidden">
               <Image
                 src={hero4Profile}
                 alt="Perfil de Petronio Cocina de Autor - restaurante en Viotá"
                 class="w-full h-full object-cover"
+                width={167}
+                height={146}
+                loading="eager"
+                decoding="sync"
               />
             </div>
           </div>
 
-          <div class="flex justify-center gap-1 mb-1">
+          <div class="flex justify-center gap-1">
             <div class="flex items-center justify-center">
               <div
-                class="px-3 gab 1 py-1 bg-brand-dark text-white rounded-xl text-[11px] xl:text-sm 2xl:text-base font-semibold"
+                class="px-2 py-0.5 bg-brand-dark text-white rounded-xl text-[11px] font-semibold"
               >
                 <span class="mr-1">★ </span>
                 <span>4.2</span>
@@ -137,27 +146,27 @@ const { icono } = Astro.props;
             </div>
             <div class="flex items-center justify-center">
               <div
-                class="px-3 py-1 bg-brand-dark text-white rounded-xl text-[11px] xl:text-sm 2xl:text-base font-semibold"
+                class="px-2 py-0.5 bg-brand-dark text-white rounded-xl text-[11px] font-semibold"
               >
-                242 - comentarios
+                242 comentarios
               </div>
             </div>
           </div>
         </div>
 
         <div class="flex px-2 justify-center flex-col">
-          <div class="flex justify-between items-center mb-1">
+          <div class="flex justify-between items-center">
             <span
-              class="text-[11px] xl:text-sm 2xl:text-base pl-1 font-bold text-text-paragraph tracking-tighter"
+              class="text-[11px] pl-1 font-bold text-text-paragraph tracking-tighter"
               >Restaurante</span
             >
             <p
-              class="text-[9px] xl:text-xs 2xl:text-sm font-bold text-end pr-5 z-30 text-[#1C2120]/70"
+              class="text-[9px] font-bold text-end pr-2 text-[#1C2120]/70"
             >
               Abierto Ahora - 10:00pm
             </p>
           </div>
-          <h4 class="text-[18px] xl:text-2xl 2xl:text-3xl font-extrabold text-text-title leading-tight">
+          <h4 class="text-base md:text-lg font-extrabold text-text-title leading-tight">
             Petronio Cocina de Autor
           </h4>
         </div>
