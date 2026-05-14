@@ -46,8 +46,8 @@ const { icono } = Astro.props;
           class="w-full h-full object-cover rounded-2xl shadow-md"
           width={1844}
           height={1049}
-          loading="eager"
-          decoding="sync"
+          loading="lazy"
+          decoding="async"
         />
 
         <div
@@ -83,10 +83,10 @@ const { icono } = Astro.props;
               src={icono}
               alt="Munitrip - Recomendados"
               class="w-4 h-4 rounded-full object-cover"
-              width={2000}
-              height={2000}
-              loading="eager"
-              decoding="sync"
+              width={32}
+              height={32}
+              loading="lazy"
+              decoding="async"
             />
             <span class="text-[9px] font-semibold text-white"
               >Recomendados</span
@@ -129,8 +129,8 @@ const { icono } = Astro.props;
                 class="w-full h-full object-cover"
                 width={167}
                 height={146}
-                loading="eager"
-                decoding="sync"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

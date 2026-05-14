@@ -32,7 +32,8 @@ const { hero1 } = Astro.props;
       width={600}
       height={338}
       loading="eager"
-      decoding="sync"
+      decoding="async"
+      fetchpriority="high"
     />
   </div>
 

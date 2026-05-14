@@ -59,6 +59,18 @@ const { segmentCount = 5 } = Astro.props;
       '.dot'
     ) as NodeListOf<HTMLDivElement>;
 
+    const loadSlideImages = (index: number): void => {
+      for (let i = Math.max(0, index - 1); i <= Math.min(segmentCount - 1, index + 1); i++) {
+        const slide = container.children[i] as HTMLElement;
+        const imgs = slide.querySelectorAll<HTMLImageElement>('img[loading="lazy"]');
+        imgs.forEach((img) => {
+          if (img.dataset.lazyLoaded) return;
+          img.loading = 'eager';
+          img.dataset.lazyLoaded = 'true';
+        });
+      }
+    };
+
     const updateDots = (): void => {
       const scrollPos = container.scrollLeft;
       const width = container.clientWidth;
@@ -73,6 +85,8 @@ const { segmentCount = 5 } = Astro.props;
           dot.style.transform = 'scale(1)';
         }
       });
+
+      loadSlideImages(index);
     };
 
     const getCurrentIndex = (): number => {
@@ -141,6 +155,7 @@ const { segmentCount = 5 } = Astro.props;
     });
 
     updateDots();
+    loadSlideImages(getCurrentIndex());
 
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       startAutoScroll();
